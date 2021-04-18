@@ -40,9 +40,8 @@
 </template>
 
 <script lang="ts">
-// import {Options, mixins} from 'vue-class-component';
-import {MixinSample} from "@/mixins/services";
 import {Options, Prop, mixins, Provide, Watch} from 'vue-property-decorator';
+import {MixinSample} from "@/mixins/services";
 import {EventBus, EventName} from '@/helpers/event-bus';
 
 @Options({
@@ -50,32 +49,24 @@ import {EventBus, EventName} from '@/helpers/event-bus';
 	components: {
 	},
 })
-// import Vue from 'vue';
-// import {Options} from 'vue-class-component';
-
-// @Options({
-// 	name: 'HelloWorld',
-// 	components: {},
-
-// })
 export default class HelloWorld extends mixins(MixinSample) {
 	@Prop() msg;
-	// readonly eventBus: EventBus = EventBus.getInstance();
+	readonly eventBus: EventBus = EventBus.getInstance();
 
 	watchedVar = '';
 
-	// @Watch('watchedVar', {immediate: true})
-	// triggerWatch() {
-	// }
+	@Watch('watchedVar', {immediate: true})
+	triggerWatch() {
+		this.consoleMessage('Test Mixin Message');
+	}
 
 	beforeMount() {
-		// this.eventBus.on(EventName.TestEvent, this.runMixinExample);
+		this.eventBus.on(EventName.TestEvent, this.runMixinExample);
 	}
 
 	async mounted() {
 		this.watchedVar = 'Mounted';
-		this.consoleMessage('Test Message');
-		// this.eventBus.emit(EventName.TestEvent, 'Hello');
+		this.eventBus.emit(EventName.TestEvent, 'Test Event Bus Message');
 	}
 
 	runMixinExample(e) {
