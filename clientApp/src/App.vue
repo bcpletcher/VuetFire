@@ -8,6 +8,21 @@
 	</div>
 </template>
 
+
+<script lang="ts">
+import {Options, Vue,  Provide} from 'vue-property-decorator';
+import firebase from './firebase/config';
+
+@Options({
+	name: 'HelloWorld',
+	components: {
+	},
+})
+export default class App extends Vue {
+	@Provide() firebase = firebase;
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

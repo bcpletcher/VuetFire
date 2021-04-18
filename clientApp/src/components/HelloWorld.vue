@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import {Options, Prop, mixins, Provide, Watch} from 'vue-property-decorator';
+import {Options, Prop, mixins, Inject, Watch} from 'vue-property-decorator';
 import {MixinSample} from "@/mixins/services";
 import {EventBus, EventName} from '@/helpers/event-bus';
 
@@ -51,6 +51,7 @@ import {EventBus, EventName} from '@/helpers/event-bus';
 })
 export default class HelloWorld extends mixins(MixinSample) {
 	@Prop() msg;
+	@Inject() readonly firebase!: any;
 	readonly eventBus: EventBus = EventBus.getInstance();
 
 	watchedVar = '';
